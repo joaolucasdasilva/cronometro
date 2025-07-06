@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contagem Regressiva</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #main-text {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+
+    #countdown {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .time-box {
+      background-color: #111;
+      border: 2px solid #444;
+      border-radius: 10px;
+      padding: 15px 20px;
+      min-width: 70px;
+    }
+
+    .time-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    .time-label {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    #photo-container {
+      width: 100%;
+      max-width: 400px;
+      border: 2px dashed #444;
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #photo-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Responsivo: celulares pequenos */
+    @media (max-width: 480px) {
+      #main-text {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .time-number {
+        font-size: 1.8rem;
+      }
+
+      .time-label {
+        font-size: 0.75rem;
+      }
+
+      .time-box {
+        padding: 10px;
+        min-width: 60px;
+      }
+
+      #countdown {
+        gap: 10px;
+      }
+    }
+
+    /* Responsivo: celulares médios e tablets */
+    @media (max-width: 768px) {
+      #main-text {
+        font-size: 2.2rem;
+      }
+
+      .time-number {
+        font-size: 2rem;
+      }
+
+      .time-label {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="main-text">Contagem Regressiva Para Ver Meu AMOR!</div>
+
+  <div id="countdown">
+    <div class="time-box">
+      <div class="time-number" id="days">--</div>
+      <div class="time-label">Dias</div>
+    </div>
+    <div class="time-box">
+      <div class="time-number" id="hours">--</div>
+      <div class="time-label">Horas</div>
+    </div>
+    <div class="time-box">
+      <div class="time-number" id="minutes">--</div>
+      <div class="time-label">Minutos</div>
+    </div>
+    <div class="time-box">
+      <div class="time-number" id="seconds">--</div>
+      <div class="time-label">Segundos</div>
+    </div>
+  </div>
+
+  <div id="photo-container">
+    <img src="eu_e_meu_amor.jpg" alt="Foto de nós dois">
+  </div>
+
+  <script>
+    const targetDate = new Date(2025, 6, 7, 0, 0, 0); // Julho é mês 6 (indexado do zero)
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("days").textContent = "0";
+        document.getElementById("hours").textContent = "0";
+        document.getElementById("minutes").textContent = "0";
+        document.getElementById("seconds").textContent = "0";
+        clearInterval(intervalId);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    const intervalId = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
